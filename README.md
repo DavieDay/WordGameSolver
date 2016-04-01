@@ -46,6 +46,14 @@ My script does a lot of preprocessing, which only needs to be run once. Once the
 
 Here's some stuff about how efficient my code is, including an analysis of how many calculations my algorithm requires.
 
+dave@dave-Aspire:~/Documents/CountdownGame$ python3 WordGame.py
+completed
+Generated leters are: aaddeeiqr
+['readied']
+Time taken:
+8.150018402375281e-07
+dave@dave-Aspire:~/Documents/CountdownGame$ 
+
 ##Results
 
 My script runs very quickly, and certainly within the 30 seconds allowed in the Coutdown letters game.
