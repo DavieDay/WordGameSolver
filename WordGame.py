@@ -4,6 +4,7 @@
 
 import random
 import itertools
+from itertools import combinations
 from LetterGenerator import gen_a_word
 import timeit
 
@@ -14,11 +15,10 @@ def	getWord():
 	#['u', 't', 't', 'b', 'p', 't', 'e', 'e', 'i']
 	sortword = sorted(word)
 	joinword = "".join(sortword)#join list
-	#print ("The LETTERS chosen are: "+word)# pintout to show the word
-
+	
 	#
 	#word = "".join(word)
-	#print(joinword)
+	print("Generated leters are: "+joinword)
 	return joinword
 
 def	fillmap():
@@ -32,10 +32,10 @@ def	fillmap():
 		addToMap(sortedKey,word)
 
 def	addToMap(key,value):
-
 	if(len(key)>2 and len(key)<10):
 		if key in wordDict:
 			wordDict.get(key).append(value) #if key exists, get the reference to the list(value) and add it.
+			#print(wordDict.get(key).append(value))
 		else:
 			wordDict.update({key:[value]})
 
@@ -47,26 +47,25 @@ def	finder(gentext):
 	wordcomb= []
 	for i in range(0, maxi):
 		wordcombs = itertools.combinations(gentext, maxi)
+		#print(itertools.combinations(gentext,maxi))
 		wordcomb = ["".join(a) for a in wordcombs]
-		i -=1
+		#print(["".join(a) for a in wordcombs])
+		maxi -=1
 		for combination in wordcomb:
 			if combination in wordDict.keys():
+				#print(wordDict[combination])
 				return(wordDict[combination])
 
 def	runner():
 	gentext = getWord()
 	result =finder(gentext)
 	return result
-'''
-def processWord(word):
-    sortword = sorted(word)
-    joinword = "".join(sortword)
-    return joinword
-'''
+
 
 # test for 10000 runs
 if __name__=='__main__':
-	import timeit
+	print("completed")
 	print(runner())
-	print(timeit.timeit("runner()",setup="from __main__ import runner", number = 10000))
-	
+	print("Time taken:")
+	print(timeit.timeit("runner()",setup="from __main__ import runner", number = 0))
+
