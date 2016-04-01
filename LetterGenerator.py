@@ -15,11 +15,12 @@ def gen_a_word():
 	genword = []#empth list for the word
 	# list of vowels
 	vowel =['a','a','a','a','a','a','a','a','a','e','e','e','e','e','e','e','e','e','e','e','e','i','i','i','i','i','i','i','i','i','o','o','o','o','o','o','o','o','u','u','u','u',]   
+	# list of consonants
 	const = ['b', 'b', 'c', 'c', 'd', 'd', 'd', 'd', 'f', 'f', 'g', 'g', 'g', 'j', 'k', 'l', 'l', 'l', 'l', 'n', 'n', 'p', 'p', 'q', 'r', 'r', 'r', 'r', 'r', 'r', 's', 's', 's', 's', 't', 't', 't', 't', 't', 't', 'v', 'v', 'w', 'w', 'x', 'y', 'y', 'z']
-# list of consonants
+	# list of all posible letters
 	both = vowel + const
 
-
+	# reshuffle each list first and then pop a letter from each
 	for l in range(0,3):
 		random.shuffle(vowel,random.random)
 		genword.insert(0,vowel.pop())
@@ -32,13 +33,13 @@ def gen_a_word():
 	for l in range (0,2):
 		random.shuffle(both,random.random)
 		genword.insert(0,both.pop())
-
 	return genword
 
+
 '''
-print(genword)
-genword = "".join(genword)
-print(genword)
+if __name__=='__main__':
+	print(gen_a_word())
+
 
 weighted letters as per Scrabble. following the provision of a list = ['a', 'a', 'a', 'b', 'k', 'r', 'z', 'z', 'z'].
 #=======================================================================
@@ -51,10 +52,6 @@ weighted letters as per Scrabble. following the provision of a list = ['a', 'a',
 #10 points: Q ×1, Z ×1
 #======================================================================
 
-
-
-vowels =['a','a','a','a','a','a','a','a','a','e','e','e','e','e','e','e','e','e','e','e','e','i','i','i','i','i','i','i','i','i','o','o','o','o','o','o','o','o','u','u','u','u',]   
-consts =['q','w','w','r','r','r','r','r','r','t','t','t','t','t','t','y','y','p','p','s','s','s','s','d','d','d','d','f','f','g','g','g','j','k','l','l','l','l','z','x','c','c','v','v','b','b','n','n','
 
 '''
 
