@@ -42,29 +42,40 @@ That didn't work too well, so I changed it.
 
 My script does a lot of preprocessing, which only needs to be run once. Once the preprocessing is done we can run the game solver again and again without that overhead.
 
-##Efficiency
+##Efficiency and Results
 
-Here's some stuff about how efficient my code is, including an analysis of how many calculations my algorithm requires.
+Here's some stuff about how efficient my code is, showing the time taken for algorithm to 1) generate a the required letters that will be used, 2) generate a list/map from the wordlist.txt file which will be the dictionary to check against, 3) generate all the possible combinations of letter that are betwen 3 and 9 letters in length, 4) pass the generated letters into the searching method, 5) check all the posible matches, and 6) pass back a result (list, if more that 1 possiblity of match).
 
 dave@dave-Aspire:~/Documents/CountdownGame$ python3 WordGame.py
 completed
 Generated leters are: aaddeeiqr
 ['readied']
 Time taken:
-8.150018402375281e-07
+8.150018402375281e- ###07
 dave@dave-Aspire:~/Documents/CountdownGame$ 
 
-##Results
+
 
 My script runs very quickly, and certainly within the 30 seconds allowed in the Coutdown letters game.
 
 ##References
-Raw  solver.py
-## This is the function that actually checks the random letters for words.
-def check(letters):
-  while (letters):
-    letters.pop()
-  return []
+Raw  LetterGenmerator.py
+## This is the function that actually selects the random letters .
+There is 3 loops as different lists of letters are needed, 1 of vowels, 1 of consonants, and 1 of all letters.
+
+	for l in range(0,3):
+		random.shuffle(vowel,random.random)
+		genword.insert(0,vowel.pop())
+
+	for l in range(0,4):
+		random.shuffle(const,random.random)
+		genword.insert(0,const.pop())
+
+
+	for l in range (0,2):
+		random.shuffle(both,random.random)
+		genword.insert(0,both.pop())
+	return genword
 
 ### This function is just a wrapper that shows how my script works.
 ### It does the preprocessing, then creates a random list of letters, and finally runs the solver.
