@@ -12,13 +12,12 @@ wordDict = dict()
 
 def	getWord():
 	word = gen_a_word()#Call from LetterGenerato to provide a 9 letter which is in a list 
-	#['u', 't', 't', 'b', 'p', 't', 'e', 'e', 'i']
+	#sample = ['u', 't', 't', 'b', 'p', 't', 'e', 'e', 'i']
 	sortword = sorted(word)
 	joinword = "".join(sortword)#join list
 	
-	#
-	#word = "".join(word)
-	print("Generated leters are: "+joinword)
+	
+	print("The Generated leters are: "+joinword)
 	return joinword
 
 def	fillmap():
@@ -61,8 +60,7 @@ def	runner():
 	result =finder(gentext)
 	return result
 
-
-# test for 10000 runs
+# set on single run
 if __name__=='__main__':
 	print("completed")
 	print(runner())
