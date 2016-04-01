@@ -13,19 +13,21 @@ As the solver is based on the Countdown game to solver the "word" I set a functi
 
 ##Background
 
-The first task I completed as part of this project was to Google "countdown letters game solver". Google gave me two relevant results on the first page, these are Cool Project name and Cool Solver.
 
 ##Words list
 
-My words list is in the file wordslist.txt in this repoistory. I got my words list is from a previous project that was to reproduce the "Zimmerman code breaker". As this file is constant there is no need to regenerate it every time the code is run, however it may be necessary to check this against a current dictionary from time to time as new words are ad every so often.
+My words list is in the file wordslist.txt in this repoistory. I search on line for a ready made words list and found a downloadable zip fie at http://dreamsteep.com/downloads/word-games-and-wordsmith-utilities/120-the-english-open-word-list-eowl.html. The file came as a cvs and was split into lettered files, so when unzipped it held 26 files.I then ran code to read each file and write it one dictionary txt file. code was obtained from http://codereview.stackexchange.com/questions/81990/manipulating-csv-files-to-regular-text-file. I ammened the cose to remove blank lines amd numberingwhich would of repeated throught the new txt file.
 
-(the Oxford Learner's Dictionaries website)
+
 
 ##Python script
 
-My script is in the fies solver.py in theis repository
+My script is in the files WordGame.py in this repository.
 
-My script is in the files solver.py in this repository and it works as follows. The most important section is:
+My script is in the files solver.py in this repository and it works as follows. 
+
+When run in your terminal as "python3 WordGame.py" the game will generate a random 9 letter word which will be used. This word will be passed to the finder. The second stage is a map of is generated to check the list of words from the dictionary   
+The most important section is:
 
 import random
 print(random.shuffle("My code is cool."))
