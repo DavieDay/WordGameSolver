@@ -1,90 +1,72 @@
 # David Hynes
 # G00295205
-# Date 29/03/2016
-
+# Date
 
 import random
 import itertools
 from LetterGenerator import gen_a_word
+import timeit
 
-#word = input("Enter your 9 Letters, Minimum of 3 vowles, minimum of 3 consonants, and mix of either 3: ")
-word = "gen_a_word()"
-#listOf = []
-sen = 1
-print ("Your chosen word is: "+word)
+wordDict = dict()
 
-#while (sen > 0):
-
-def shuffle(word):
-	word = list(word)
-	random.shuffle(word)
-	word = "".join(word)
-	return word
-
-
-#fourword = word
-
-#return all(count <=input_counter[key] for key, count in word_counter.items())
-#lister = [word for word if len(word) <= len(user)]
-#word1 = shuffle(word)
-
-
-
-def loadcheckd(filepath, checkd={}):
-	f = open(filepath, 'r')
-	for word in f:
-		word = word.strip()
-		sortword = sorted(word)
-		sortword = "".join(sortword)
-		hashword = hash(sortword)
-		words = checkd.get(hashword, set())
-		words.update({word})
-		checkd[hashword] = words
-	return checkd
-
-def check(word, checkd):
-	word = list(word)
+def	getWord():
+	word = gen_a_word()#Call from LetterGenerato to provide a 9 letter which is in a list 
+	#['u', 't', 't', 'b', 'p', 't', 'e', 'e', 'i']
 	sortword = sorted(word)
-	sortword = "".join(sortword)
-	hashword = hash(sortword)
-	results = checkd.get(hashword, None)
-	return results
+	joinword = "".join(sortword)#join list
+	#print ("The LETTERS chosen are: "+word)# pintout to show the word
 
-checkd = loadcheckd("wordlist.txt")
-anagram = shuffle(word)
+	#
+	#word = "".join(word)
+	#print(joinword)
+	return joinword
 
-print("Looking for a word of %s." % anagram)
-
-words = check(word, checkd)
-if words:	  
-	print("Found %d word:" % len(words))
-	  #sen =0
+def	fillmap():
+	count=0
+	f = open('wordlist.txt', 'r')
+	words = f.read().split()
 	for word in words:
-		print(word)
-		
-	    
-	#elif words:
-	  #word = list(itertools.combinations(s,len(word)-2))
+		key = sorted(word)
+		sortedKey = "".join(key)
+		count +=1
+		addToMap(sortedKey,word)
+
+def	addToMap(key,value):
+
+	if(len(key)>2 and len(key)<10):
+		if key in wordDict:
+			wordDict.get(key).append(value) #if key exists, get the reference to the list(value) and add it.
+		else:
+			wordDict.update({key:[value]})
+
+fillmap()
+
+def	finder(gentext):
+	maxi = 9
+	wordcombs = []
+	wordcomb= []
+	for i in range(0, maxi):
+		wordcombs = itertools.combinations(gentext, maxi)
+		wordcomb = ["".join(a) for a in wordcombs]
+		i -=1
+		for combination in wordcomb:
+			if combination in wordDict.keys():
+				return(wordDict[combination])
+
+def	runner():
+	gentext = getWord()
+	result =finder(gentext)
+	return result
+'''
+def processWord(word):
+    sortword = sorted(word)
+    joinword = "".join(sortword)
+    return joinword
+'''
+
+# test for 10000 runs
+if __name__=='__main__':
+	import timeit
+	print(runner())
+	print(timeit.timeit("runner()",setup="from __main__ import runner", number = 10000))
 	
-else:
-	  #shortWord = list(itertools.combinations(word,len(word)-1))
-	  #for word in words:
-	  #    print(word)
-	print("There are no words.")
-	  #print(any((True for word in shortWord if word in words)))
-
-
-
-#=======================================================================
-#1 point: E ×12, A ×9, I ×9, O ×8, N ×6, R ×6, T ×6, L ×4, S ×4, U ×4
-#2 points: D ×4, G ×3
-#3 points: B ×2, C ×2, M ×2, P ×2
-#4 points: F ×2, H ×2, V ×2, W ×2, Y ×2
-#5 points: K ×1
-#8 points: J ×1, X ×1
-#10 points: Q ×1, Z ×1
-#======================================================================
-
-
-
-
