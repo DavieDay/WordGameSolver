@@ -48,10 +48,15 @@ Here's some stuff about how efficient my code is, showing the time taken for alg
 
 dave@dave-Aspire:~/Documents/CountdownGame$ python3 WordGame.py
 completed
+
 Generated leters are: aaddeeiqr
-['readied']
-Time taken:
-8.150018402375281e- ###07
+
+returned ['readied']
+
+Time taken: 
+
+###8.150018402375281e-07
+
 dave@dave-Aspire:~/Documents/CountdownGame$ 
 
 
@@ -59,9 +64,15 @@ dave@dave-Aspire:~/Documents/CountdownGame$
 My script runs very quickly, and certainly within the 30 seconds allowed in the Coutdown letters game.
 
 ##References
-Raw  LetterGenmerator.py
+
+LetterGenmerator.py
+WordGame.py
+
+
 ## This is the function that actually selects the random letters .
-There is 3 loops as different lists of letters are needed, 1 of vowels, 1 of consonants, and 1 of all letters.
+The LetterGenerator is call from the WordGame to generate the letters.
+There is 3 loops, each calling from a different lists  which are, 1 of vowels, 1 of consonants, and 1 of all letters.
+This is the easiesy way match the requirements of the rules on the letter selection.
 
 	for l in range(0,3):
 		random.shuffle(vowel,random.random)
@@ -71,11 +82,49 @@ There is 3 loops as different lists of letters are needed, 1 of vowels, 1 of con
 		random.shuffle(const,random.random)
 		genword.insert(0,const.pop())
 
-
 	for l in range (0,2):
 		random.shuffle(both,random.random)
 		genword.insert(0,both.pop())
 	return genword
 
-### This function is just a wrapper that shows how my script works.
-### It does the preprocessing, then creates a random list of letters, and finally runs the solver.
+This is one of the preprocesses that is required, however it is run every time the main script is run.
+
+The second preprocess is that of creating the check list. It is split in two sections 1) of generating a list of the words by reading the wordslist.txt file and 2) generating the map of the word and keys. As the words are been added to the map they are checked to ensure that the word is between 3 and 9 caracters in length as this are the only allowable variations.
+
+def	fillmap():
+	count=0
+	f = open('wordlist.txt', 'r')
+	words = f.read().split()
+	for word in words:
+		key = sorted(word)
+		sortedKey = "".join(key)
+		count +=1
+		addToMap(sortedKey,word)
+
+def	addToMap(key,value):
+	if(len(key)>2 and len(key)<10):
+		if key in wordDict:
+			wordDict.get(key).append(value) #if key exists, get the reference to the list(value) and add it.
+			#print(wordDict.get(key).append(value))
+		else:
+			wordDict.update({key:[value]})
+
+
+When the Letters are generated the list is concantinated into a word and is passed into the search function. This function will find all of the possible combinations of letters from the 9 letter word.
+
+def	finder(gentext):
+	maxi = 9
+	wordcombs = []
+	wordcomb= []
+	for i in range(0, maxi):
+		wordcombs = itertools.combinations(gentext, maxi)
+		#print(itertools.combinations(gentext,maxi))
+		wordcomb = ["".join(a) for a in wordcombs]
+		#print(["".join(a) for a in wordcombs])
+		maxi -=1
+		for combination in wordcomb:
+			if combination in wordDict.keys():
+				#print(wordDict[combination])
+				return(wordDict[combination])
+
+, and finally runs the solver.
